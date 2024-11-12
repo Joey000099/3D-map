@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>3D Map of Sans-Souci Palace and Distance to Citadelle</title>
+    <style>
+        /* Fullscreen map style */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        #map {
+            height: 100%;
+            width: 100%;
+            position: relative;
+        }
+        .label {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+        #label-sans-souci {
+            top: 20px;
+            left: 20px;
+        }
+        #label-distance {
+            top: 50px;
+            left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 3D Map container -->
+    <div id="map">
+        <!-- Google Maps 3D element for Sans-Souci Palace -->
+        <gmp-map-3d center="19.60328133356938,-72.22199358229503,192.1881060290052" tilt="81.88727934398734" "="" heading="-114.85639805074973" range="1134.9273097061086" mode="ro" roll="0"></gmp-map-3d>
+
+
+        <!-- Labels for Sans-Souci and Distance -->
+        <div class="label" id="label-sans-souci">Sans-Souci Palace</div>
+        <div class="label" id="label-distance">Distance to Citadelle: xxx km</div>
+    </div>
+
+    <!-- Google Maps JavaScript API with 3D and geometry library -->
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOyOQjQHdLJIHM4QhSmTaa2SAngbPjaAA&v=alpha&libraries=geometry,maps3d"></script>
+    <script>
+        // Coordinates of Sans-Souci Palace and Citadelle Laferrière
+        const sansSouciCoords = { lat: 19.5818, lng: -72.2255 };
+        const citadelleCoords = { lat: 19.5728, lng: -72.2448 };
+
+        function calculateDistance() {
+            const distance = google.maps.geometry.spherical.computeDistanceBetween(
+                new google.maps.LatLng(sansSouciCoords),
+                new google.maps.LatLng(citadelleCoords)
+            );
+
+            // Display distance in kilometers
+            document.getElementById('label-distance').innerText =
+                `Distance to Citadelle: ${(distance / 1000).toFixed(2)} km`;
+        }
+
+        // Initialize distance calculation when Google Maps is loaded
+        function initMap() {
+            calculateDistance();
+        }
+    </script>
+</body>
+</html>
