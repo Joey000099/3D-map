@@ -1,60 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>3D Model of Sans-Souci Palace on Google Maps</title>
+    <title>Sans-Souci Palace 3D Model on Google Maps</title>
     <style>
-        /* Fullscreen styling */
         html, body {
             height: 100%;
             margin: 0;
             padding: 0;
         }
-        #map, #threejs-canvas {
+        #map-container {
+            position: relative;
             height: 100%;
-            width: 100%;
+        }
+        gmp-map-3d, #threejs-canvas {
             position: absolute;
             top: 0;
             left: 0;
+            width: 100%;
+            height: 100%;
         }
     </style>
 </head>
 <body>
-    <!-- Google Maps Container -->
-    <div id="map"></div>
+    <!-- Map Container with 3D model overlay -->
+    <div id="map-container">
+        <gmp-map-3d center="19.5818, -72.2255" tilt="42.95" heading="-109.56" range="1158.15" mode="ro" roll="0"></gmp-map-3d>
+        <canvas id="threejs-canvas"></canvas>
+    </div>
 
-    <!-- Three.js Canvas Container -->
-    <canvas id="threejs-canvas"></canvas>
-
-    <!-- Google Maps and Three.js libraries -->
-    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOyOQjQHdLJIHM4QhSmTaa2SAngbPjaAA&libraries=geometry,places"></script>
+    <!-- Google Maps API, Three.js, and GLTFLoader -->
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOyOQjQHdLJIHM4QhSmTaa2SAngbPjaAA&libraries=geometry,places&v=alpha"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
 
     <script>
-        // Initialize Google Maps
-        const mapOptions = {
-            center: { lat: 19.5818, lng: -72.2255 },
-            zoom: 17,
-            tilt: 45
-        };
-        const map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
         // Initialize Three.js
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.z = 100;
+        camera.position.set(0, 50, 100); // Adjust as needed for the view
         const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('threejs-canvas'), alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
-        
 
-
-
-        // Load the GLB Model
+        // Load the GLB model
         const loader = new THREE.GLTFLoader();
         loader.load('https://joey000099.github.io/3D-map/CesiumMilkTruck.glb', function(gltf) {
             const model = gltf.scene;
-            model.position.set(0,0,0);  // Adjust position as needed
-            model.scale.set(0.1, 0.1, 0.1);  // Adjust scale for correct sizing on the map
+            model.position.set(0, 0, 0);  // Adjust position
+           model.position.set(28.76, 33.52, -89.72);  // Adjust scale
             scene.add(model);
         });
 
