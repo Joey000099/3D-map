@@ -32,7 +32,7 @@
       const { Map3DElement, Model3DElement } = await google.maps.importLibrary("maps3d");
 
       const map = new Map3DElement({
-        center: {lat: lat: 19.5818, lng: -72.2255, altitude: 1800},
+        center: {lat: 19.5818, lng: -72.2255, altitude: 1800},
         heading: -90,
         tilt: 90,
         defaultLabelsDisabled: true,
@@ -65,7 +65,7 @@
         },
         // Non-clamped to the ground model.
         {
-          position: {lat: lat: 19.5818, lng: -72.2255, altitude: 2500},
+          position: {lat: 19.5818, lng: -72.2255, altitude: 2500},
           altitudeMode: 'RELATIVE_TO_GROUND',
           orientation: {tilt: 270},
         },
