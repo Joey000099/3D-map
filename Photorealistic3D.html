@@ -56,7 +56,7 @@
         {
           position: {lat: 37.735, lng: -121.63, altitude: 0},
           orientation: {tilt: 270},
-          scale: 1.2,
+          scale: 2.2,
         },
         // A model with an additional transformation applied.
         {
@@ -73,7 +73,7 @@
 
       for (const {position, altitudeMode, orientation, scale} of models) {
         const model = new Model3DElement({
-          src: '\CesiumMilkTruck.glb',
+          src: 'CesiumMilkTruck.glb',
           position,
           altitudeMode,
           orientation,
