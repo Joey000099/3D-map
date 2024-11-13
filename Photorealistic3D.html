@@ -46,20 +46,14 @@
         const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('threejs-canvas'), alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
         
-const radius = 100; // Example radius of the sphere
-const lat = -72.2255 * (Math.PI / 180); // Convert latitude to radians
-const lon = 19.5818 * (Math.PI / 180); // Convert longitude to radians
 
-const x = radius * Math.cos(lat) * Math.cos(lon);
-const y = radius * Math.sin(lat);
-const z = radius * Math.cos(lat) * Math.sin(lon);
 
 
         // Load the GLB Model
         const loader = new THREE.GLTFLoader();
         loader.load('https://joey000099.github.io/3D-map/CesiumMilkTruck.glb', function(gltf) {
             const model = gltf.scene;
-            model.position.set(x, y, z);  // Adjust position as needed
+            model.position.set(28.76, 33.52, -89.72);  // Adjust position as needed
             model.scale.set(0.1, 0.1, 0.1);  // Adjust scale for correct sizing on the map
             scene.add(model);
         });
