@@ -53,7 +53,7 @@
         const loader = new THREE.GLTFLoader();
         loader.load('https://joey000099.github.io/3D-map/CesiumMilkTruck.glb', function(gltf) {
             const model = gltf.scene;
-            model.position.set(28.76, 33.52, -89.72);  // Adjust position as needed
+            model.position.set(0,0,0);  // Adjust position as needed
             model.scale.set(0.1, 0.1, 0.1);  // Adjust scale for correct sizing on the map
             scene.add(model);
         });
