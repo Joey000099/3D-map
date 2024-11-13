@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Photorealistic 3D Maps in Maps JavaScript models</title>
+  <title>Cité Soleil</title>
   <style>
     html, body {
       height: 100%;
@@ -41,18 +41,42 @@
     async function init() {
       const { Map3DElement, Model3DElement } = await google.maps.importLibrary("maps3d");
 
+      // Initialize map centered on Cité Soleil
       const map = new Map3DElement({
         center: {lat: 18.588088017264813, lng: -72.33356947356926, altitude: 1800},
-        tilt : 81.88727934398734,
-        heading : -114.85639805074973,
-        range : 1134.9273097061086,
-        mode : "ro",
-        roll : 0,
+        tilt: 81.88727934398734,
+        heading: -114.85639805074973,
+        range: 1134.9273097061086,
+        mode: "ro",
+        roll: 0,
         defaultLabelsDisabled: true,
       });
 
       document.body.append(map);
 
+      // Define the Cité Soleil Polygon Coordinates
+      const citeSoleilCoords = [
+        {lat: 18.5795, lng: -72.3319},
+        {lat: 18.5835, lng: -72.3245},
+        {lat: 18.5882, lng: -72.3278},
+        {lat: 18.5918, lng: -72.3352},
+        {lat: 18.5886, lng: -72.3390},
+        {lat: 18.5839, lng: -72.3372}
+      ];
+
+      // Add the Cité Soleil Polygon
+      const citeSoleilPolygon = new google.maps.Polygon({
+        paths: citeSoleilCoords,
+        strokeColor: '#FF0000',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#FF0000',
+        fillOpacity: 0.35,
+      });
+
+      citeSoleilPolygon.setMap(map);
+
+      // Add a 3D model for demonstration
       const model = new Model3DElement({
         src: 'https://joey000099.github.io/3D-map/CesiumMilkTruck.glb',
         position: {lat: 19.5818, lng: -72.2255, altitude: 2500},
