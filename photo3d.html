@@ -73,15 +73,19 @@
       ];
 
       for (const {position, altitudeMode, orientation, scale} of models) {
-        const model = new Model3DElement({
-          src: 'PalaisSansSoucis.glb',
-          position,
-          altitudeMode,
-          orientation,
-          scale,
-        });
+       const model = new Model3DElement({
+  src: 'PalaisSansSoucis.glb',
+  position,
+  altitudeMode,
+  orientation,
+  scale,
+});
 
-        map.append(model);
+model.addEventListener('error', (e) => {
+  console.error('Model loading error:', e);
+});
+
+map.append(model);
       }
     }
 
